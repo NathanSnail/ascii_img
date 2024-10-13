@@ -36,7 +36,8 @@ def compute(maximum, img):
 	]
 
 	msg = "```ansi\n"
-	prev = 0
+	prev_fg = 0
+	prev_bg = 0
 	ansi = "\u001b"
 	for y in range(img_arr.shape[0]):
 		for x in range(img_arr.shape[1]):
@@ -56,8 +57,12 @@ def compute(maximum, img):
 				],
 				key=lambda x: x[1],
 			)[0]
-			msg += f"{f"{ansi}[0;{correct}m" if prev != correct else ""}{" " if correct > 39 else "█"}"
-			prev = correct
+			if correct > 39:
+				msg += f"{f"{ansi}[{correct}m " if prev_bg != correct else " "}"
+				prev_bg = correct
+			else:
+				msg += f"{f"{ansi}[{correct}m█" if prev_fg != correct else "█"}"
+				prev_fg = correct
 		msg += "\n"
 	msg += "```"
 	return msg
