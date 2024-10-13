@@ -68,7 +68,6 @@ def compute(maximum, img):
 	return msg
 
 
-msg = "A" * (charmax + 1)  # do while loop :((((
 low = 10  # it just looks awful if this small
 high = 100  # don't waste time searching unrealistic images
 while True:
