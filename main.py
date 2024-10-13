@@ -35,7 +35,7 @@ def compute(maximum, img):
 			return int(x * maximum / sz)
 
 		img = img.resize((apply(img.size[0] * 2), apply(img.size[1])))
-	img_arr = np.array(img)
+	img_arr = np.array(img, dtype=np.float32)
 
 	msg = "```ansi\n"
 	prev_fg = 0
@@ -49,7 +49,7 @@ def compute(maximum, img):
 						col[0],
 						sum(
 							[
-								(float(x) - float(y)) ** 2 * w
+								(x - y) ** 2 * w
 								for x, y, w in zip(px, col[1:], [0.299, 0.587, 0.114])
 							]
 						),
