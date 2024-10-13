@@ -68,11 +68,20 @@ def compute(maximum, img):
 	return msg
 
 
-msg = "A" * 2001  # do while loop :((((
-highest = 40
-while len(msg) > 2000:
-	msg = compute(highest, img)
-	highest -= 1
+msg = "A" * (charmax + 1)  # do while loop :((((
+low = 10  # it just looks awful if this small
+high = 100  # don't waste time searching unrealistic images
+while True:
+	search = (
+		low * 2 + high
+	) // 3  # bigger images take longer to search so not doing binary search is faster
+	msg = compute(search, img)
+	if (low * 2 + high) // 3 == low:
+		break
+	if len(msg) > charmax:
+		high = search - 1
+	else:
+		low = search
 
 print(msg)
 pyperclip.copy(msg)
